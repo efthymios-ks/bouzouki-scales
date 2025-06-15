@@ -57,6 +57,13 @@
           >
             Βρες το δρόμο
           </button>
+          <button
+            class="nav-btn"
+            data-section="fretboard-container"
+            id="nav-fretboard"
+          >
+            Ταστιέρα
+          </button>
         </div>
       </div>
     </nav>
@@ -75,12 +82,28 @@
         class="w-100"
         style="max-width: 700px"
       ></div>
+      <div
+        id="fretboard-container"
+        class="w-100"
+        style="max-width: 700px; display: none"
+      >
+        <div
+          id="fretboard"
+          data-layout="D,A,F,C"
+          data-allow-select
+          data-select-all-equal
+        ></div>
+      </div>
     </div>
 
     <script type="module" src="Features/Scales/ScalesComponent.js"></script>
     <script
       type="module"
       src="Features/Scales/ScaleFinderComponent.js"
+    ></script>
+    <script
+      type="module"
+      src="Features/Fretboard/FretboardComponent.js"
     ></script>
 
     <script>
