@@ -1,12 +1,20 @@
 import { Note } from "../Notes/Note.js";
 import { Scale } from "./Scale.js";
-import { ScaleFinder } from "./ScaleFinder.js";
+import { renderScalesFunction } from "./RenderScaleFunction.js";
 
 (() => {
   const prefix = "scale-finder";
   const containerId = `${prefix}-container`;
 
   const container = document.getElementById(containerId);
+  container.classList.add(
+    "d-flex",
+    "flex-column",
+    "justify-content-start",
+    "align-items-center",
+    "min-vh-100",
+    "p-3"
+  );
   container.innerHTML = ` 
     <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 mb-3">
       <div class="form-check form-switch">
@@ -36,37 +44,16 @@ import { ScaleFinder } from "./ScaleFinder.js";
       return;
     }
 
-    const wrapper = document.createElement("div");
-    wrapper.className = "d-flex flex-wrap justify-content-center gap-3";
-
-    for (const scale of scales) {
-      const tonicName = getNoteName(scale.tonic);
-      const intervals = scale.intervals.join("-");
-      const notes = scale.notes.join(" ");
-
-      const tile = document.createElement("div");
-      tile.className = "card flex-grow-1";
-      tile.style.minWidth = "200px";
-      tile.style.maxWidth = "250px";
-
-      tile.innerHTML = `
-      <div class="card-body">
-        <h5 class="card-title text-center">${scale.name}</h5>
-        <p class="card-text mb-1"><strong>Τονική:</strong> ${tonicName}</p> 
-        <p class="card-text mb-1"><strong>Διαστήματα:</strong> ${intervals}</p>
-        <p class="card-text"><strong>Νότες:</strong> ${notes}</p>
-      </div>
-    `;
-
-      wrapper.appendChild(tile);
-    }
-
-    resultsContainer.innerHTML = "";
-    resultsContainer.appendChild(wrapper);
+    renderScalesFunction(
+      resultsContainer,
+      scales,
+      "scale-finder-component",
+      displayNamesCheckbox.checked
+    );
   }
 
   function dispatchSelectionChange(selectedKeys) {
-    const foundScales = ScaleFinder.findScales(selectedKeys);
+    const foundScales = Scale.findScales(selectedKeys);
     renderResults(foundScales);
   }
 

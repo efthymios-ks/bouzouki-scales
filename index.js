@@ -9,7 +9,7 @@
 
   function showSection(sectionId) {
     sections.forEach((section) => {
-      section.style.display = section.id === sectionId ? "block" : "none";
+      section.classList.toggle("d-none", section.id !== sectionId);
     });
 
     navButtons.forEach((btn) => {
